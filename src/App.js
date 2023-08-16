@@ -23,6 +23,7 @@ export default function App() {
       ) : (
         <div>Loading...</div>
       )}
+      <h1> Hola probando CI/CD </h1>
     </div>
   );
 }
