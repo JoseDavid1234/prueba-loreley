@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './index.css';
 
-function App() {
+export default function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(
+      'https://mi0j29dooe.execute-api.us-east-1.amazonaws.com/prueba-jose/prueba-jose'
+    )
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {data ? (
+        <div>
+          <p>Status Code: {data.statusCode}</p>
+          <p>Body: {data.body}</p>
+        </div>
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }
-
-export default App;
